@@ -45,7 +45,8 @@ def scrap_dates_url(year):
     soup = bs4.BeautifulSoup(request_page.content, "html.parser")
 
     dates = []
-    months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+    months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+              "Novembro", "Dezembro"]
     for a in soup.findAll("a", class_="dropdown-item"):
         for month in months:
             if month in str(a):
@@ -73,7 +74,6 @@ def scrap_premier_league(year):
             players += page_players
             page_index += 1
         players_date_dict[date] = players
-        break
 
     return players_date_dict
 
@@ -124,5 +124,5 @@ def create_wb(players, year):
     wb.save("Fifa{}PremierLeaguePlayers.xlsx".format(year))
 
 
-players_fifa19 = scrap_premier_league(19)
-create_wb(players_fifa19, 19)
+players_fifa = scrap_premier_league(15)
+create_wb(players_fifa, 15)
